@@ -1,8 +1,8 @@
-FROM golang:alpine as builder
+FROM golang:1.19-alpine as builder
 
 RUN go install github.com/Kethsar/ytarchive@master
 
-FROM alpine
+FROM alpine:3.17
 RUN apk add --no-cache dumb-init ffmpeg
 COPY --chown=65534:65534 --from=builder /go/bin/ytarchive /ytarchive
 USER 65534
