@@ -1,6 +1,8 @@
 FROM golang:1.19-alpine as builder
 
-RUN go install github.com/Kethsar/ytarchive@master
+ARG VERSION=master
+
+RUN go install github.com/Kethsar/ytarchive@$VERSION
 
 FROM alpine:3.17
 RUN apk add --no-cache dumb-init ffmpeg
