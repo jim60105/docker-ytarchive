@@ -11,14 +11,14 @@ RUN go install github.com/Kethsar/ytarchive@$VERSION
 FROM alpine:3.18 as final
 
 # ffmpeg
-COPY --link --from=mwader/static-ffmpeg:6.0 /ffmpeg /ffmpeg
+COPY --link --from=mwader/static-ffmpeg:6.0 /ffmpeg /usr/local/bin/ffmpeg
 
 # ytarchive
-COPY --link --chown=1001:1001 --from=build /go/bin/ytarchive /
+COPY --link --chown=1001:1001 --from=build /go/bin/ytarchive /usr/local/bin/ytarchive
 USER 1001
 
 WORKDIR /download
 
 VOLUME ["/download"]
 
-ENTRYPOINT [ "/ytarchive" ]
+ENTRYPOINT [ "/usr/local/bin/ytarchive" ]
