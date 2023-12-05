@@ -54,7 +54,23 @@ docker build -f Dockerfile.distroless --build-arg VERSION=v0.3.2 -t ytarchive:v0
 docker run -it -v ".:/download" ghcr.io/jim60105/ytarchive [OPTIONS] [url] [quality]
 ```
 
-Mount the current directory as `/download` and run ytarchive with additional input arguments.
+Mount the current directory as `/download` and run ytarchive with additional input arguments.  
 The downloaded files will be saved to where you run the command.
 
 The `[OPTIONS]`, `[url]`, and `[quality]` placeholders should be replaced with the options and arguments for ytarchive. Check the [ytarchive README](https://github.com/Kethsar/ytarchive#usage) for more information.
+
+## License
+
+> The main program, ytarchive, is distributed under [MIT](https://github.com/Kethsar/ytarchive/blob/master/LICENSE).  
+> Please consult their repository for access to the source code and licenses.  
+> The following is the license for the Dockerfiles and CI workflows in this repository.
+
+<img src="https://github.com/jim60105/docker-ytarchive/assets/16995691/782f16b9-3f49-49ef-943d-a29324fcc8db" alt="open graph" width="200" />
+
+[GNU GENERAL PUBLIC LICENSE Version 3](LICENSE)
+
+This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+
+This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License along with this program. If not, see <https://www.gnu.org/licenses/>.
