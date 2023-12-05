@@ -31,7 +31,7 @@ runs:
       id: meta
       uses: docker/metadata-action@v5
       with:
-        images: ${{ inputs.DOCKERHUB_USERNAME }}/${{ github.event.repository.name }},ghcr.io/${{ github.repository }},quay.io/${{ github.repository }}
+        images: ${{ inputs.DOCKERHUB_USERNAME }}/ytarchive,ghcr.io/${{ github.repository_owner }}/ytarchive,quay.io/${{ github.repository_owner }}/ytarchive
         flavor: |
           latest=${{ inputs.tag == 'alpine' }}
         tags: |
