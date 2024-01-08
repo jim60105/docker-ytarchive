@@ -4,10 +4,9 @@ This repository contains Dockerfiles for [Kethsar/ytarchive: A tool for archivin
 
 Get the Dockerfile on [GitHub](https://github.com/jim60105/ytarchive), or pull the image from [ghcr.io](https://ghcr.io/jim60105/ytarchive) or [Quay.io](https://quay.io/repository/jim60105/ytarchive).
 
-These Dockerfiles are created to construct images using three different base images: Alpine, Red Hat UBI (Universal Base Image), and Google Distroless.  
-All of them operate effectively without notable risks, so choose the one that suits your preference.
+These Dockerfiles are created to construct images using three different base images: scratch, Red Hat UBI (Universal Base Image), and Google Distroless.
 
-We used Alpine image as the default.
+We used scratch image as the default.
 
 ## Available Pre-built Image
 
@@ -32,16 +31,16 @@ This repository contains three Dockerfiles for building Docker images based on d
 
 | Dockerfile            | Base Image                                                                                                   |
 | --------------------- | ------------------------------------------------------------------------------------------------------------ |
-| Dockerfile            | [Alpine 3.18](https://hub.docker.com/_/alpine/)                                                              |
-| Dockerfile.ubi        | [Red Hat UBI9 micro](https://catalog.redhat.com/software/containers/ubi9/ubi-micro/615bdf943f6014fa45ae1b58) |
-| Dockerfile.distroless | [Google Distroless static-debian12](https://github.com/GoogleContainerTools/distroless)                      |
+| Dockerfile            | [scratch](https://hub.docker.com/_/scratch/)                                                                 |
+| ubi.Dockerfile        | [Red Hat UBI9 micro](https://catalog.redhat.com/software/containers/ubi9/ubi-micro/615bdf943f6014fa45ae1b58) |
+| distroless.Dockerfile | [Google Distroless static-debian12](https://github.com/GoogleContainerTools/distroless)                      |
 
 Please build them like this:
 
 ```bash
 docker build -f Dockerfile            --build-arg VERSION=v0.4.0 -t ytarchive:v0.4.0 .
-docker build -f Dockerfile.ubi        --build-arg VERSION=master -t ytarchive:ubi .
-docker build -f Dockerfile.distroless --build-arg VERSION=v0.3.2 -t ytarchive:v0.3.2-distroless .
+docker build -f ubi.Dockerfile        --build-arg VERSION=master -t ytarchive:ubi .
+docker build -f distroless.Dockerfile --build-arg VERSION=v0.3.2 -t ytarchive:v0.3.2-distroless .
 ```
 
 > [!NOTE]  
@@ -65,7 +64,18 @@ The `[OPTIONS]`, `[url]`, and `[quality]` placeholders should be replaced with t
 > Please consult their repository for access to the source code and licenses.  
 > The following is the license for the Dockerfiles and CI workflows in this repository.
 
-<img src="https://github.com/jim60105/docker-ytarchive/assets/16995691/782f16b9-3f49-49ef-943d-a29324fcc8db" alt="open graph" width="200" />
+> [!CAUTION]
+> A GPLv3 licensed Dockerfile means that you _**MUST**_ **distribute the source code with the same license**, if you
+>
+> - Re-distribute the image. (You can simply point to this GitHub repository if you doesn't made any code changes.)
+> - Distribute a image that uses code from this repository.
+> - Or **distribute a image based on this image**. (`FROM ghcr.io/jim60105/Dockerfile-template` in your Dockerfile)
+>
+> "Distribute" means to make the image available for other people to download, usually by pushing it to a public registry. If you are solely using it for your personal purposes, this has no impact on you.
+>
+> Please consult the [LICENSE](LICENSE) for more details.
+
+<img src="https://github.com/jim60105/docker-ytarchive/assets/16995691/782f16b9-3f49-49ef-943d-a29324fcc8db" alt="gplv3" width="200" />
 
 [GNU GENERAL PUBLIC LICENSE Version 3](LICENSE)
 

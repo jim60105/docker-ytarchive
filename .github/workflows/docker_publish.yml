@@ -62,7 +62,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile.ubi
+          file: ./ubi.Dockerfile
           push: true
           target: final
           tags: ${{ steps.setup.outputs.tags }}
@@ -92,7 +92,7 @@ jobs:
         uses: docker/build-push-action@v5
         with:
           context: .
-          file: ./Dockerfile.distroless
+          file: ./distroless.Dockerfile
           push: true
           target: final
           tags: ${{ steps.setup.outputs.tags }}
