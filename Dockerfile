@@ -1,24 +1,31 @@
 # syntax=docker/dockerfile:1
-
-### Build
-FROM golang:1.19-alpine as build
-
+ARG UID=1001
 ARG VERSION=master
 
-RUN go install github.com/Kethsar/ytarchive@$VERSION
+### Build
+FROM golang:1.19 as build
+
+ARG VERSION
+RUN CGO_ENABLED=0 go install github.com/Kethsar/ytarchive@$VERSION
 
 ### Final
-FROM alpine:3.18 as final
+FROM scratch as final
+
+ARG UID
 
 # ffmpeg
-COPY --link --from=mwader/static-ffmpeg:6.0 /ffmpeg /usr/local/bin/ffmpeg
+COPY --link --from=mwader/static-ffmpeg:6.1.1 /ffmpeg /bin/
+
+# scratch image doesn't contain CA trust store
+COPY --link --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 
 # ytarchive
-COPY --link --chown=1001:1001 --from=build /go/bin/ytarchive /usr/local/bin/ytarchive
-USER 1001
+COPY --link --chown=$UID:0 --chmod=774 \
+    --from=build /go/bin/ytarchive /bin/
 
+USER $UID
 WORKDIR /download
-
 VOLUME ["/download"]
 
-ENTRYPOINT [ "/usr/local/bin/ytarchive" ]
+ENTRYPOINT [ "/bin/ytarchive" ]
+CMD [ "-h" ]
