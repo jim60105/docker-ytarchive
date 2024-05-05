@@ -2,7 +2,7 @@
 
 This repository contains Dockerfiles for [Kethsar/ytarchive: A tool for archiving YouTube livestreams from the start](https://github.com/Kethsar/ytarchive) from the community.
 
-Get the Dockerfile on [GitHub](https://github.com/jim60105/ytarchive), or pull the image from [ghcr.io](https://ghcr.io/jim60105/ytarchive) or [Quay.io](https://quay.io/repository/jim60105/ytarchive).
+Get the Dockerfile on [GitHub](https://github.com/jim60105/docker-ytarchive), or pull the image from [ghcr.io](https://ghcr.io/jim60105/ytarchive) or [Quay.io](https://quay.io/repository/jim60105/ytarchive).
 
 These Dockerfiles are created to construct images using three different base images: scratch, Red Hat UBI (Universal Base Image), and Google Distroless.
 
