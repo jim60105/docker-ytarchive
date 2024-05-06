@@ -1,0 +1,3 @@
+[submodule "ytarchive"]
+	path = ytarchive
+	url = https://github.com/Kethsar/ytarchive
