@@ -41,7 +41,7 @@ COPY --link --chown=$UID:0 --chmod=775 --from=compress /newdir /licenses
 
 # ffmpeg
 COPY --link --from=ghcr.io/jim60105/static-ffmpeg-upx:7.0-1 /ffmpeg /
-COPY --link --from=ghcr.io/jim60105/static-ffmpeg-upx:7.0-1 /ffprobe /
+# COPY --link --from=ghcr.io/jim60105/static-ffmpeg-upx:7.0-1 /ffprobe /
 
 # dumb-init
 COPY --link --from=ghcr.io/jim60105/static-ffmpeg-upx:7.0-1 /dumb-init /
