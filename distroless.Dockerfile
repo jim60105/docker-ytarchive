@@ -11,6 +11,9 @@ FROM golang:1.19 AS compress
 ARG TARGETARCH
 ARG TARGETVARIANT
 
+# Ensure the cache is not reused when installing ytarchive
+ARG RELEASE
+
 ARG VERSION
 RUN --mount=type=cache,id=apt-$TARGETARCH$TARGETVARIANT,sharing=locked,target=/var/cache/apt \
     --mount=type=cache,id=aptlists-$TARGETARCH$TARGETVARIANT,sharing=locked,target=/var/lib/apt/lists \

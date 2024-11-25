@@ -6,6 +6,9 @@ ARG RELEASE=0
 ### Build
 FROM registry.access.redhat.com/ubi9/go-toolset:1.19 AS compress
 
+# Ensure the cache is not reused when installing ytarchive
+ARG RELEASE
+
 ARG VERSION
 ARG TARGETARCH
 RUN CGO_ENABLED=0 go install github.com/Kethsar/ytarchive@$VERSION && \
