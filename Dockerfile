@@ -6,7 +6,7 @@ ARG RELEASE=0
 ########################################
 # Compress stage
 ########################################
-FROM golang:1.19 as compress
+FROM golang:1.19 AS compress
 
 # RUN mount cache for multi-arch: https://github.com/docker/buildx/issues/549#issuecomment-1788297892
 ARG TARGETARCH
@@ -31,7 +31,7 @@ RUN --mount=type=cache,id=apt-$TARGETARCH$TARGETVARIANT,sharing=locked,target=/v
 ########################################
 # Final stage
 ########################################
-FROM scratch as final
+FROM scratch AS final
 
 ARG UID
 

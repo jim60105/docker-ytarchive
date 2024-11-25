@@ -4,7 +4,7 @@ ARG VERSION=master
 ARG RELEASE=0
 
 ### Build
-FROM registry.access.redhat.com/ubi9/go-toolset:1.19 as compress
+FROM registry.access.redhat.com/ubi9/go-toolset:1.19 AS compress
 
 ARG VERSION
 ARG TARGETARCH
@@ -18,7 +18,7 @@ RUN CGO_ENABLED=0 go install github.com/Kethsar/ytarchive@$VERSION && \
     mkdir -p newdir
 
 ### Final
-FROM registry.access.redhat.com/ubi9/ubi-micro as final
+FROM registry.access.redhat.com/ubi9/ubi-micro AS final
 
 ARG UID
 
