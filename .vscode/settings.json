@@ -3,8 +3,11 @@
         "Buildx",
         "Distroless",
         "Dockerfiles",
+        "ffprobe",
         "Kethsar",
+        "livestream",
         "livestreams",
+        "lzma",
         "nossl",
         "ytarchive"
     ]
