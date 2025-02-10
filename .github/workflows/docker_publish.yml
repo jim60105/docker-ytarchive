@@ -35,7 +35,7 @@ jobs:
           tag: alpine
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./Dockerfile
@@ -47,7 +47,7 @@ jobs:
             VERSION=${{ github.head_ref || github.ref_name }}
             RELEASE=${{ github.run_number }}
           platforms: linux/amd64,linux/arm64
-          # Cache to regietry instead of gha to avoid the capacity limit.
+          # Cache to registry instead of gha to avoid the capacity limit.
           cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/ytarchive:cache
           cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/ytarchive:cache,mode=max
           sbom: true
@@ -73,7 +73,7 @@ jobs:
           tag: ubi
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./ubi.Dockerfile
@@ -85,7 +85,7 @@ jobs:
             VERSION=${{ github.head_ref || github.ref_name }}
             RELEASE=${{ github.run_number }}
           platforms: linux/amd64,linux/arm64
-          # Cache to regietry instead of gha to avoid the capacity limit.
+          # Cache to registry instead of gha to avoid the capacity limit.
           cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/ytarchive:cache
           cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/ytarchive:cache,mode=max
           sbom: true
@@ -111,7 +111,7 @@ jobs:
           tag: distroless
 
       - name: Build and push
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./distroless.Dockerfile
@@ -123,7 +123,7 @@ jobs:
             VERSION=${{ github.head_ref || github.ref_name }}
             RELEASE=${{ github.run_number }}
           platforms: linux/amd64,linux/arm64
-          # Cache to regietry instead of gha to avoid the capacity limit.
+          # Cache to registry instead of gha to avoid the capacity limit.
           cache-from: type=registry,ref=ghcr.io/${{ github.repository_owner }}/ytarchive:cache
           cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/ytarchive:cache,mode=max
           sbom: true
