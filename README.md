@@ -17,8 +17,8 @@ We used scratch image as the default.
 
 ```bash
 docker run -it -v ".:/download" ghcr.io/jim60105/ytarchive:latest     [OPTIONS] [url] [quality]
-docker run -it -v ".:/download" ghcr.io/jim60105/ytarchive:v0.4.0     [OPTIONS] [url] [quality]
-docker run -it -v ".:/download" ghcr.io/jim60105/ytarchive:v0.3.2-ubi [OPTIONS] [url] [quality]
+docker run -it -v ".:/download" ghcr.io/jim60105/ytarchive:v0.5.0     [OPTIONS] [url] [quality]
+docker run -it -v ".:/download" ghcr.io/jim60105/ytarchive:v0.4.0-ubi [OPTIONS] [url] [quality]
 ```
 
 ## Building the Docker Image
@@ -38,7 +38,7 @@ This repository contains three Dockerfiles for building Docker images based on d
 Please build them like this:
 
 ```bash
-docker build -f Dockerfile            --build-arg VERSION=v0.4.0 -t ytarchive:v0.4.0 .
+docker build -f Dockerfile            --build-arg VERSION=v0.5.0 -t ytarchive:v0.5.0 .
 docker build -f ubi.Dockerfile        --build-arg VERSION=master -t ytarchive:ubi .
 docker build -f distroless.Dockerfile --build-arg VERSION=v0.3.2 -t ytarchive:v0.3.2-distroless .
 ```
