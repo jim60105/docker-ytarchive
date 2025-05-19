@@ -40,11 +40,11 @@ COPY --link --chown=$UID:0 --chmod=775 --from=compress /newdir /download
 COPY --link --chown=$UID:0 --chmod=775 --from=compress /newdir /licenses
 
 # ffmpeg
-COPY --link --from=ghcr.io/jim60105/static-ffmpeg-upx:7.1 /ffmpeg /
-# COPY --link --from=ghcr.io/jim60105/static-ffmpeg-upx:7.1 /ffprobe /
+COPY --link --from=ghcr.io/jim60105/static-ffmpeg-upx:7.1.1 /ffmpeg /
+# COPY --link --from=ghcr.io/jim60105/static-ffmpeg-upx:7.1.1 /ffprobe /
 
 # dumb-init
-COPY --link --from=ghcr.io/jim60105/static-ffmpeg-upx:7.1 /dumb-init /
+COPY --link --from=ghcr.io/jim60105/static-ffmpeg-upx:7.1.1 /dumb-init /
 
 # Copy licenses (OpenShift Policy)
 COPY --link --chown=$UID:0 --chmod=775 LICENSE /licenses/Dockerfile.LICENSE
