@@ -3,14 +3,16 @@ name: docker_publish
 on:
   push:
     tags:
-      - 'v*'
+      - "v*"
   schedule:
-    - cron:  '0 3 * * 1'
+    - cron: "0 3 * * 1"
 
   workflow_dispatch:
 
 # Sets the permissions granted to the GITHUB_TOKEN for the actions in this job.
 permissions:
+  id-token: write
+  attestations: write
   contents: read
   packages: write
 
@@ -22,7 +24,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: 'true'
+          submodules: "true"
 
       - name: Setup docker
         id: setup
@@ -35,6 +37,7 @@ jobs:
           tag: alpine
 
       - name: Build and push
+        id: build_push_alpine
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -53,6 +56,24 @@ jobs:
           sbom: true
           provenance: true
 
+      - name: Attest DockerHub image (alpine)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/ytarchive
+          subject-digest: ${{ steps.build_push_alpine.outputs.digest }}
+
+      - name: Attest GHCR image (alpine)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ghcr.io/${{ github.repository_owner }}/ytarchive
+          subject-digest: ${{ steps.build_push_alpine.outputs.digest }}
+
+      - name: Attest Quay image (alpine)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: quay.io/${{ github.repository_owner }}/ytarchive
+          subject-digest: ${{ steps.build_push_alpine.outputs.digest }}
+
   docker-ubi:
     runs-on: ubuntu-latest
 
@@ -60,7 +81,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: 'true'
+          submodules: "true"
 
       - name: Setup docker
         id: setup
@@ -73,6 +94,7 @@ jobs:
           tag: ubi
 
       - name: Build and push
+        id: build_push_ubi
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -91,6 +113,24 @@ jobs:
           sbom: true
           provenance: true
 
+      - name: Attest DockerHub image (ubi)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/ytarchive
+          subject-digest: ${{ steps.build_push_ubi.outputs.digest }}
+
+      - name: Attest GHCR image (ubi)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ghcr.io/${{ github.repository_owner }}/ytarchive
+          subject-digest: ${{ steps.build_push_ubi.outputs.digest }}
+
+      - name: Attest Quay image (ubi)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: quay.io/${{ github.repository_owner }}/ytarchive
+          subject-digest: ${{ steps.build_push_ubi.outputs.digest }}
+
   docker-distroless:
     runs-on: ubuntu-latest
 
@@ -98,7 +138,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          submodules: 'true'
+          submodules: "true"
 
       - name: Setup docker
         id: setup
@@ -111,6 +151,7 @@ jobs:
           tag: distroless
 
       - name: Build and push
+        id: build_push_distroless
         uses: docker/build-push-action@v6
         with:
           context: .
@@ -128,3 +169,21 @@ jobs:
           cache-to: type=registry,ref=ghcr.io/${{ github.repository_owner }}/ytarchive:cache,mode=max
           sbom: true
           provenance: true
+
+      - name: Attest DockerHub image (distroless)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: index.docker.io/${{ secrets.DOCKERHUB_USERNAME }}/ytarchive
+          subject-digest: ${{ steps.build_push_distroless.outputs.digest }}
+
+      - name: Attest GHCR image (distroless)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ghcr.io/${{ github.repository_owner }}/ytarchive
+          subject-digest: ${{ steps.build_push_distroless.outputs.digest }}
+
+      - name: Attest Quay image (distroless)
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: quay.io/${{ github.repository_owner }}/ytarchive
+          subject-digest: ${{ steps.build_push_distroless.outputs.digest }}
